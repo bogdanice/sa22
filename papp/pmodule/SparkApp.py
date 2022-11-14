@@ -1,19 +1,19 @@
 from pyspark import SparkConf
 from pyspark.sql import SparkSession
 
-import settings
+import pmodule.settings as settings
 
 class SparkApp:
 
     def __init__(self, **kargs):
         self._sparkConf = SparkConf() \
                             .setAppName("papp") \
-                            .setMaster("local") \
-                            .setAll(sparkConfigList)
+                            .setAll(settings.sparkConfigList)
         self._spark = SparkSession \
                         .builder \
                         .enableHiveSupport() \
-                        .config(conf=spark_conf) \
+                        .master("local") \
+                        .config(conf=self._sparkConf) \
                         .getOrCreate()
 
 

@@ -1,4 +1,4 @@
 sparkConfigList = [
-    ("spark.sql.warehouse.dir" , "/data/spark"),
-	("spark.driver.extraJavaOptions", "-Dderby.system.home=/data/spark")
+    ("spark.sql.warehouse.dir" , "/workspace/data/spark"),
+	("spark.driver.extraJavaOptions", "-Dderby.system.home=/workspace/data/spark")
 ]

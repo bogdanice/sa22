@@ -1,4 +1,5 @@
 import logging
+import sys
 
 from flask import Flask
 from flask import Response
@@ -8,6 +9,8 @@ import pmodule.SparkApp as SparkApp
 
 # -------------------------------------------------------------------------------
 
+sys.path.append('.')
+
 logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s')
 
 logger = logging.getLogger(__name__)
@@ -16,6 +19,9 @@ logger.setLevel(logging.INFO)
 
 # Flask app
 app = Flask(__name__)
+
+# Spark app
+sparkApp = SparkApp.SparkApp()
 
 
 @app.route('/')
@@ -31,11 +37,19 @@ def getHealth():
     return Response(rBody)
 
 
+@app.route("/sparksession")
+def getSparkSession():
+    session = sparkApp.getSparkSession()
+    logger.info(session)
+    return Response("OK")
+
+
 @app.route("/tablecount")
 def getTableCount():
-    tables = SparkApp.getSparkSession().catalog.listTables()
-    rBody = set(map(lambda t: loader.count_from_table(t.name), tables))
-    return Response(rBody)
+    tables = sparkApp.getSparkSession().catalog.listTables()
+    tableCount = set(map(lambda t: loader.count_from_table(t.name), tables))
+    logger.info(tableCount)
+    return Response("OK")
 
 
 def main():
