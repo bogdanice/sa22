@@ -1,6 +1,9 @@
 FROM python:3.6-alpine
 
-COPY . /app
+COPY papp /app
+COPY main.py /app
+COPY requirements.txt /app
+COPY data /data
 WORKDIR  /app
 RUN pip3 install -r requirements.txt
 
