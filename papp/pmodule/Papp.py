@@ -61,7 +61,8 @@ def load():
     logger.info("Read file %s into dataframe. Dataframe lines=%s", filePath, dfCount)
     tableName = constants.Tables.CAR_DETAILS
     logger.info("Save as table %s", tableName)
-    sparkService.storeDataFrameAsTable(df, tableName)
+    # sparkService.storeDataFrameAsTable(df, tableName)
+    df.write.mode('overwrite').saveAsTable(tableName)
     return Response(dfCount)
 
 @pApp.route("/diselCars")
