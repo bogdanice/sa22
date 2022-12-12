@@ -27,9 +27,11 @@ class SparkService:
     
     def readCsvFileToDataFrame(self, filePath, schema, delimiter=",", header=True) -> DataFrame:
         return self._spark.read.format("csv") \
-                        .option(delimiter=delimiter, header=True) \
+                        .option("header", True) \
+                        .option("sep", delimiter) \
                         .schema(schema) \
                         .load(filePath)
 
     def storeDataFrameAsTable(self, df, tableName):
-        df.write.saveAsTable(name=table_name, format="parquet", mode="overwrite", compress=False)
+        # df.write.saveAsTable(name=tableName, format="parquet", mode="overwrite", compress=False)
+        df.write.mode('overwrite').saveAsTable(tableName)
