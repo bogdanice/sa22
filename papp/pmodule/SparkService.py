@@ -3,7 +3,7 @@ from pyspark.sql import SparkSession, DataFrame
 
 import pmodule.settings as settings
 
-class SparkApp:
+class SparkService:
 
     def __init__(self, **kargs):
         self._sparkConf = SparkConf() \
