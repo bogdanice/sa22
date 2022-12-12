@@ -55,7 +55,8 @@ def getTableCount():
 @pApp.route("/load")
 def load():
     # By default load the file under /data
-    filePath = "/workspace/sa22/papp/data/car_details_default.csv"
+    # filePath = "/workspace/sa22/papp/data/car_details_default.csv"
+    filePath = "/data/car_details_default.csv"
     df = sparkService.readCsvFileToDataFrame(filePath, schemas.SCHEMA_CAR_DETAILS)
     dfCount = df.count()
     logger.info("Read file %s into dataframe. Dataframe lines=%s", filePath, dfCount)
