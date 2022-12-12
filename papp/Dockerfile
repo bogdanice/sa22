@@ -1,5 +1,8 @@
 FROM python:3.6-alpine
 
+# Allow statements and log messages to immediately appear in the Knative logs
+ENV PYTHONUNBUFFERED True
+
 COPY pmodule /app/pmodule
 COPY main.py /app
 COPY requirements.txt /app
