@@ -63,9 +63,9 @@ def load():
     logger.info("Save as table %s", tableName)
     # sparkService.storeDataFrameAsTable(df, tableName)
     df.write.mode('overwrite').saveAsTable(tableName)
-    return Response(dfCount)
+    return Response(str(dfCount))
 
-@pApp.route("/diselCars")
+@pApp.route("/dieselCars")
 def diselCars():
     sqlQuery = "SELECT * from {} where {}='Diesel'"\
         .format(constants.Tables.CAR_DETAILS, constants.Columns.FUEL)
@@ -76,4 +76,4 @@ def diselCars():
     logger.info("Execute query: %s", sqlQuery)
     dfDieselCars = sparkService.getSparkSession().sql(sqlQuery)
     dfDieselCarsCount = dfDieselCars.count()
-    return Response(dfDieselCars)
+    return Response(str(dfDieselCarsCount))
